@@ -1,7 +1,7 @@
 # PclZip
 PclZip is a PHP Class for creating and manipulating Zip Archives.
 
-Full documentation will be available soon
+Full documentation will be available soon [here](documentation/manual.md)
 
 # What's new
 
