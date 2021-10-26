@@ -1,32 +1,12 @@
 # PclZip
-A PHP Class to create and manipulate Zip Archives
+PclZip is a PHP Class for creating and manipulating Zip Archives.
 
+Full documentation will be available soon
 
-
-
-0 - Sommaire
-============
-    1 - Introduction
-    2 - What's new
-    3 - Corrected bugs
-    4 - Known bugs or limitations
-    5 - License
-    6 - Warning
-    7 - Documentation
-    8 - Author
-    9 - Contribute
-
-1 - Introduction
-================
-
-  PclZip is a library that allow you to manage a Zip archive.
-
-  Full documentation about PclZip can be found here : http://www.phpconcept.net/pclzip
-
-2 - What's new
-==============
+# What's new
 
   Version 2.8.2 :
+  
     - PCLZIP_CB_PRE_EXTRACT and PCLZIP_CB_POST_EXTRACT are now supported with 
       extraction as a string (PCLZIP_OPT_EXTRACT_AS_STRING). The string
       can also be modified in the post-extract call back.
@@ -36,11 +16,13 @@ A PHP Class to create and manipulate Zip Archives
     - Correct support of 64bits systems (Thanks to WordPress team)
 
   Version 2.8.1 :
+  
     - Move option PCLZIP_OPT_BY_EREG to PCLZIP_OPT_BY_PREG because ereg() is
       deprecated in PHP 5.3. When using option PCLZIP_OPT_BY_EREG, PclZip will
       automatically replace it by PCLZIP_OPT_BY_PREG.
   
   Version 2.8 :
+  
     - Improve extraction of zip archive for large files by using temporary files
       This feature is working like the one defined in r2.7.
       Options are renamed : PCLZIP_OPT_TEMP_FILE_ON, PCLZIP_OPT_TEMP_FILE_OFF,
@@ -51,6 +33,7 @@ A PHP Class to create and manipulate Zip Archives
       './/' preambule in file path.
 
   Version 2.7 :
+  
     - Improve creation of zip archive for large files :
       PclZip will now autosense the configured memory and use temporary files
       when large file is suspected.
@@ -70,6 +53,7 @@ A PHP Class to create and manipulate Zip Archives
       path, PclZip was not able to add the file.
 
   Version 2.6 :
+  
     - Code optimisation
     - New attributes PCLZIP_ATT_FILE_COMMENT gives the ability to
       add a comment for a specific file. (Don't really know if this is usefull)
@@ -90,6 +74,7 @@ A PHP Class to create and manipulate Zip Archives
       upgrade of pclzip code for new versions.
   
   Version 2.5 :
+  
     - Introduce the ability to add file/folder with individual properties (file descriptor).
       This gives for example the ability to change the filename of a zipped file.
       . Able to add files individually
@@ -108,6 +93,7 @@ A PHP Class to create and manipulate Zip Archives
       by current path (getcwd())
   
   Version 2.4 :
+  
     - Code improvment : try to speed up the code by removing unusefull call to pack()
     - Correct bug in delete() : delete() should be called with no argument. This was not
       the case in 2.3. This is corrected in 2.4.
@@ -125,10 +111,12 @@ A PHP Class to create and manipulate Zip Archives
 
 
   Version 2.3 :
+  
     - Correct a bug with PHP5 : affecting the value 0xFE49FFE0 to a variable does not
       give the same result in PHP4 and PHP5 ....
 
   Version 2.2 :
+  
     - Try development of PCLZIP_OPT_CRYPT .....
       However this becomes to a stop. To crypt/decrypt I need to multiply 2 long integers,
       the result (greater than a long) is not supported by PHP. Even the use of bcmath
@@ -160,6 +148,7 @@ A PHP Class to create and manipulate Zip Archives
       zip archive put trailing 0 bytes after decryption. PclZip is now supporting this.
 
   Version 2.1 :
+  
     - Add the ability to abort the extraction by using a user callback function.
       The user can now return the value '2' in its callback which indicates to stop the
       extraction. For a pre call-back extract is stopped before the extration of the current
@@ -176,6 +165,7 @@ A PHP Class to create and manipulate Zip Archives
 
 
   Version 2.0 :
+  
     ***** Warning : Some new features may break the backward compatibility for your scripts.
                     Please carefully read the readme file.
     - Add the ability to delete by Index, name and regular expression. This feature is 
@@ -213,6 +203,7 @@ A PHP Class to create and manipulate Zip Archives
 
 
   Version 1.3 :
+  
     - Removing the double include check. This is now done by include_once() and require_once()
       PHP directives.
     - Changing the error handling mecanism : Remove the use of an external error library.
@@ -256,6 +247,7 @@ A PHP Class to create and manipulate Zip Archives
       default index will be -1 when not explicitly set by the methods.
 
   Version 1.2 :
+  
     - Adding a duplicate function.
     - Adding a merge function. The merge function is a "quick merge" function,
       it just append the content of an archive at the end of the first one. There
@@ -289,14 +281,15 @@ A PHP Class to create and manipulate Zip Archives
     - No new feature
 
 
-3 - Corrected bugs
-==================
+# Corrected bugs
 
   Corrected in Version 2.0 :
+  
     - Corrected : During an extraction, if a call-back fucntion is used and try to skip
                   a file, all the extraction process is stopped. 
 
   Corrected in Version 1.3 :
+  
     - Corrected : Support of static synopsis for method extract() is broken.
     - Corrected : invalid size of archive content field (0xFF) should be (0xFFFF).
     - Corrected : When an extract is done with a remove_path parameter, the entry for
@@ -330,13 +323,13 @@ A PHP Class to create and manipulate Zip Archives
     - Corrected : Error while compressing files greater than PCLZIP_READ_BLOCK_SIZE (default=1024).
 
 
-4 - Known bugs or limitations
-=============================
+# Known bugs or limitations
 
   Please publish bugs reports in SourceForge :
     http://sourceforge.net/tracker/?group_id=40254&atid=427564
 
   In Version 2.x :
+  
     - PclZip does only support file uncompressed or compressed with deflate (compression method 8)
     - PclZip does not support password protected zip archive
     - Some concern were seen when changing mtime of a file while archiving. 
@@ -372,14 +365,14 @@ A PHP Class to create and manipulate Zip Archives
     - Limitation : Multi-disk zip archive are not supported.
 
 
-5 - License
-===========
+# License
 
   Since version 1.1.2, PclZip Library is released under GNU/LGPL license.
   This library is free, so you can use it at no cost.
 
   HOWEVER, if you release a script, an application, a library or any kind of
   code using PclZip library (or a part of it), YOU MUST :
+  
   - Indicate in the documentation (or a readme file), that your work
     uses PclZip Library, and make a reference to the author and the web site
     http://www.phpconcept.net
@@ -390,26 +383,24 @@ A PHP Class to create and manipulate Zip Archives
 
   For more information about GNU/LGPL license : http://www.gnu.org
 
-6 - Warning
-=================
+# Warning
 
   This library and the associated files are non commercial, non professional work.
   It should not have unexpected results. However if any damage is caused by this software
   the author can not be responsible.
   The use of this software is at the risk of the user.
 
-7 - Documentation
-=================
-  PclZip User Manuel is available in English on PhpConcept : http://www.phpconcept.net/pclzip/man/en/index.php
+# Documentation
+
+PclZip User Manuel is available in English on PhpConcept : http://www.phpconcept.net/pclzip/man/en/index.php
   A Russian translation was done by Feskov Kuzma : http://php.russofile.ru/ru/authors/unsort/zip/
 
-8 - Author
-==========
+# Author
 
-  This software was written by Vincent Blavet (vincent@phpconcept.net) on its leasure time.
+  This software was written by Vincent Blavet (vincent@phpconcept.net) on its leasure time. Initial release of PclZip was in Feb. 2002.
 
-9 - Contribute
-==============
-  If you want to contribute to the development of PclZip, please contact vincent@phpconcept.net.
+# Contribute
+
+If you want to contribute to the development of PclZip, please contact vincent@phpconcept.net.
   If you can help in financing PhpConcept hosting service, please go to
   http://www.phpconcept.net/soutien.php
