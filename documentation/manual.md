@@ -33,7 +33,7 @@ optional. Example :
 require_once('pclzip.lib.php');
 $archive = new PclZip('archive.zip');
 $v_list = $archive->add('dev/file.txt',
-PCLZIP_OPT_REMOVE_PATH, 'dev');
+                        PCLZIP_OPT_REMOVE_PATH, 'dev');
 ```
 
 Here the first parameter 'dev/file.txt' is mandatory, while
@@ -43,9 +43,9 @@ arguments :
 
 ```php
 $list = $archive->extract(PCLZIP_OPT_PATH, "folder",
-PCLZIP_OPT_REMOVE_PATH, "data",
-PCLZIP_CB_PRE_EXTRACT, "callback_pre_extract",
-PCLZIP_CB_POST_EXTRACT, "callback_post_extract");
+                          PCLZIP_OPT_REMOVE_PATH, "data",
+                          PCLZIP_CB_PRE_EXTRACT, "callback_pre_extract",
+                          PCLZIP_CB_POST_EXTRACT, "callback_post_extract");
 ```
 
 Here the files are extracted in 'folder', and the 'data' path, when
@@ -60,7 +60,7 @@ file before extracting the next one.
 
 ```php
 $list = $archive->extract(PCLZIP_OPT_PATH, "folder" ,
-PCLZIP_OPT_REMOVE_ALL_PATH);
+                          PCLZIP_OPT_REMOVE_ALL_PATH);
 ```
 
 Here the files are extracted in the directory 'folder' and all the
