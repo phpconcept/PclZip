@@ -75,6 +75,24 @@ The defined arguments, their usage and restrictions are described in
 the section " Optional Variable Parameters". In the description of
 each method, the list of available optional parameters are indicated.
 
+
+## Class and Methods
+
+- [PclZip::PclZip()](\"index.php?option=com_content&view=article&id=52&Itemid=10\") : Class creator  
+- [PclZip::create()](\"index.php?option=com_content&view=article&id=53&Itemid=10\") : Create the PKZIP file and add files or folders  
+- [PclZip::listContent()](\"index.php?option=com_content&view=article&id=54&Itemid=10\") : List content of an archive  
+- [PclZip::extract()](\"index.php?option=com_content&view=article&id=55&Itemid=10\") : Extract all or part of the content of the archive  
+- [PclZip::properties()](\"index.php?option=com_content&view=article&id=56&Itemid=10\") : Get properties of the archive  
+- [PclZip::add()](\"index.php?option=com_content&view=article&id=57&Itemid=10\") : Get properties of the archive  
+- [PclZip::delete()](\"index.php?option=com_content&view=article&id=58&Itemid=10\") : Delete files inside the archive  
+- [PclZip::merge()](\"index.php?option=com_content&view=article&id=59&Itemid=10\") : Add one archive content in a second archive  
+- [PclZip::duplicate()](\"index.php?option=com_content&view=article&id=60&Itemid=10\") : Duplicate the archive  
+
+
+
+
+
+
 ## Return values
 
 Return values may be different from methods to methods. They are
