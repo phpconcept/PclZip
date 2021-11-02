@@ -3,6 +3,93 @@ PclZip is a PHP Class for creating and manipulating Zip Archives.
 
 Full documentation will be available soon [here](documentation/manual.md)
 
+# How it works
+
+## Internal representation of a PKZIP archive
+
+Each PKZIP archive is represented by an object of class PclZip.
+When creating a PclZip archive (on object of class PclZip), the name
+of the archive file is associated to the object. At this time the file is not
+checked, nor read, it can even don't exist at this time.
+
+```php
+require_once('pclzip.lib.php');
+$archive = new PclZip("archive.zip");
+``` 
+
+The archive is then manipulated by using the public methods
+associated with PclZip object. To create an archive, when it does not
+already exist, the method ' create()' must be used, with a list of files
+and/or folders to archive as parameter.
+If the archive already exist, its content can be read by access
+methods like ' listContent()' or ' extract()'.
+
+## Parameters and arguments
+
+Each method has its own arguments which are described in the
+synopsis ofthe method. These arguments can be mandatory or
+optional. Example :
+
+```php
+require_once('pclzip.lib.php');
+$archive = new PclZip('archive.zip');
+$v_list = $archive->add('dev/file.txt',
+                        PCLZIP_OPT_REMOVE_PATH, 'dev');
+```
+
+Here the first parameter 'dev/file.txt' is mandatory, while
+'PCLZIP_OPT_REMOVE_PATH, ...' is optional.
+Some methods can also be called only with a variable list of optional
+arguments :
+
+```php
+$list = $archive->extract(PCLZIP_OPT_PATH, "folder",
+                          PCLZIP_OPT_REMOVE_PATH, "data",
+                          PCLZIP_CB_PRE_EXTRACT, "callback_pre_extract",
+                          PCLZIP_CB_POST_EXTRACT, "callback_post_extract");
+```
+
+Here the files are extracted in 'folder', and the 'data' path, when
+present in the archive, is removed.
+Also, before each extraction of a single file from the archive, a callback function, which name is provided by the user (here
+'callback_pre_extract()'), is called. This function gives the ability to
+change the path and the filename that is in the extraction process, or
+to skip the extraction of this particular file.
+At the end of the extraction of the file an other call-back function is
+called, giving the ability to the user to perform specific actions on the
+file before extracting the next one.
+
+```php
+$list = $archive->extract(PCLZIP_OPT_PATH, "folder" ,
+                          PCLZIP_OPT_REMOVE_ALL_PATH);
+```
+
+Here the files are extracted in the directory 'folder' and all the
+memorized path of the files are removed, even if they are different.
+By this feature the user does not have to specify the exact value of a
+path to remove.
+These small examples shows how the variable list of options works.
+They offer better features (with the cost of a little more complexity).
+They will also ease the introduction of new features without changing
+the synopsis of all the methods.
+The defined arguments, their usage and restrictions are described in
+the section " Optional Variable Parameters". In the description of
+each method, the list of available optional parameters are indicated.
+
+
+## Class and Methods
+
+- [PclZip::PclZip()](documentation/class_and_methods.md#method-pclzippclzip) : Class creator  
+- [PclZip::create()](documentation/class_and_methods.md#method-pclzipcreate) : Create the PKZIP file and add files or folders  
+- [PclZip::listContent()](documentation/class_and_methods.md#method-pclziplistcontent) : List content of an archive  
+- [PclZip::extract()](documentation/class_and_methods.md#method-pclzipextract) : Extract all or part of the content of the archive  
+- [PclZip::properties()](documentation/class_and_methods.md#method-pclzipproperties) : Get properties of the archive  
+- [PclZip::add()](documentation/class_and_methods.md#method-pclzipadd) : Get properties of the archive  
+- [PclZip::delete()](documentation/class_and_methods.md#method-pclzipdelete) : Delete files inside the archive  
+- [PclZip::merge()](documentation/class_and_methods.md#method-pclzipmerge) : Add one archive content in a second archive  
+- [PclZip::duplicate()](documentation/class_and_methods.md#method-pclzipduplicate) : Duplicate the archive  
+
+
 # What's new
 
   Version 2.8.2 :
