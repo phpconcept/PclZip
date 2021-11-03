@@ -22,8 +22,6 @@
 //   The use of this software is at the risk of the user.
 //
 // --------------------------------------------------------------------------------
-// $Id: pclzip.lib.php,v 1.60 2009/09/30 21:01:04 vblavet Exp $
-// --------------------------------------------------------------------------------
 
   // ----- Constants
   if (!defined('PCLZIP_READ_BLOCK_SIZE')) {
@@ -83,7 +81,7 @@
 // --------------------------------------------------------------------------------
 
   // ----- Global variables
-  $g_pclzip_version = "2.8.2";
+  $g_pclzip_version = "2.8.3-RC1";
 
   // ----- Error codes
   //   -1 : Unable to open file in binary write mode
@@ -212,7 +210,8 @@
   //   Note that no real action is taken, if the archive does not exist it is not
   //   created. Use create() for that.
   // --------------------------------------------------------------------------------
-  function PclZip($p_zipname)
+  //function PclZip($p_zipname)
+  function __construct($p_zipname)
   {
 
     // ----- Tests the zlib
@@ -1836,15 +1835,20 @@
     $v_memory_limit = ini_get('memory_limit');
     $v_memory_limit = trim($v_memory_limit);
     $last = strtolower(substr($v_memory_limit, -1));
+    
+    if (($last == 'g') || ($last == 'm') || ($last == 'k')) {
+      $v_memory_limit = substr($v_memory_limit, 0, -1);
  
-    if($last == 'g')
-        //$v_memory_limit = $v_memory_limit*1024*1024*1024;
-        $v_memory_limit = $v_memory_limit*1073741824;
-    if($last == 'm')
-        //$v_memory_limit = $v_memory_limit*1024*1024;
-        $v_memory_limit = $v_memory_limit*1048576;
-    if($last == 'k')
-        $v_memory_limit = $v_memory_limit*1024;
+      if($last == 'g')
+          //$v_memory_limit = $v_memory_limit*1024*1024*1024;
+          $v_memory_limit = $v_memory_limit*1073741824;
+      if($last == 'm')
+          //$v_memory_limit = $v_memory_limit*1024*1024;
+          $v_memory_limit = $v_memory_limit*1048576;
+      if($last == 'k')
+          $v_memory_limit = $v_memory_limit*1024;
+
+    }
             
     $p_options[PCLZIP_OPT_TEMP_FILE_THRESHOLD] = floor($v_memory_limit*PCLZIP_TEMPORARY_FILE_RATIO);
     

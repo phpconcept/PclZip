@@ -1,6 +1,6 @@
 <?php
 // --------------------------------------------------------------------------------
-// PhpConcept Library - Zip Module 2.8.2
+// PhpConcept Library - Zip Module 2.8.3
 // --------------------------------------------------------------------------------
 // License GNU/LGPL - Vincent Blavet - August 2009
 // http://www.phpconcept.net
@@ -21,8 +21,6 @@
 //   this software the author can not be responsible.
 //   The use of this software is at the risk of the user.
 //
-// --------------------------------------------------------------------------------
-// $Id: pclzip-trace.lib.php,v 1.73 2009/09/30 21:00:06 vblavet Exp $
 // --------------------------------------------------------------------------------
 
   // ----- Constants
@@ -83,7 +81,7 @@
 // --------------------------------------------------------------------------------
 
   // ----- Global variables
-  $g_pclzip_version = "2.8.2";
+  $g_pclzip_version = "2.8.3";
 
   // ----- Error codes
   //   -1 : Unable to open file in binary write mode
@@ -212,7 +210,8 @@
   //   Note that no real action is taken, if the archive does not exist it is not
   //   created. Use create() for that.
   // --------------------------------------------------------------------------------
-  function PclZip($p_zipname)
+  //function PclZip($p_zipname)
+  function __construct($p_zipname)
   {
     PclTraceFctStart(__FILE__, __LINE__, 'PclZip::PclZip', "zipname=$p_zipname");
 
@@ -273,7 +272,8 @@
   // --------------------------------------------------------------------------------
   function create($p_filelist)
   {
-    PclTraceFctStart(__FILE__, __LINE__, 'PclZip::create', "filelist='$p_filelist', ...");
+    PclTraceFctStart(__FILE__, __LINE__, 'PclZip::create', "");
+    PclTraceFctMessage(__FILE__, __LINE__, 3, "filelist='".(is_string($p_filelist) ? $p_filelist : 'array_of_filenames')."'");
     $v_result=1;
 
     // ----- Reset the error handler
@@ -1964,17 +1964,25 @@
     PclTraceFctMessage(__FILE__, __LINE__, 3,"Create an auto-threshold for use of temporay files");
     // ----- Get 'memory_limit' configuration value
     $v_memory_limit = ini_get('memory_limit');
+    PclTraceFctMessage(__FILE__, __LINE__, 4, "Current memory limit from ini_get('memory_limit') is : '".$v_memory_limit."'");
     $v_memory_limit = trim($v_memory_limit);
     $last = strtolower(substr($v_memory_limit, -1));
+    
+    if (($last == 'g') || ($last == 'm') || ($last == 'k')) {
+      $v_memory_limit = substr($v_memory_limit, 0, -1);
+      PclTraceFctMessage(__FILE__, __LINE__, 4, "Extracted memory limit is : '".$v_memory_limit."' ".$last);
  
-    if($last == 'g')
-        //$v_memory_limit = $v_memory_limit*1024*1024*1024;
-        $v_memory_limit = $v_memory_limit*1073741824;
-    if($last == 'm')
-        //$v_memory_limit = $v_memory_limit*1024*1024;
-        $v_memory_limit = $v_memory_limit*1048576;
-    if($last == 'k')
-        $v_memory_limit = $v_memory_limit*1024;
+      if($last == 'g')
+          //$v_memory_limit = $v_memory_limit*1024*1024*1024;
+          $v_memory_limit = $v_memory_limit*1073741824;
+      if($last == 'm')
+          //$v_memory_limit = $v_memory_limit*1024*1024;
+          $v_memory_limit = $v_memory_limit*1048576;
+      if($last == 'k')
+          $v_memory_limit = $v_memory_limit*1024;
+
+      PclTraceFctMessage(__FILE__, __LINE__, 4, "Memory limit in bytes is : '".$v_memory_limit."' ");
+    }
             
     $p_options[PCLZIP_OPT_TEMP_FILE_THRESHOLD] = floor($v_memory_limit*PCLZIP_TEMPORARY_FILE_RATIO);
     
