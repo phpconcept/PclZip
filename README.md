@@ -92,6 +92,12 @@ each method, the list of available optional parameters are indicated.
 
 # What's new
 
+  Version 2.8.3 :
+  
+    - Change constructor name to be compatible with PHP7 and future versions
+    - Improve memory threshold calculation
+    - Full testing with PHP 7.3.31 (105 regression tests)
+  
   Version 2.8.2 :
   
     - PCLZIP_CB_PRE_EXTRACT and PCLZIP_CB_POST_EXTRACT are now supported with 
