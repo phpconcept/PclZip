@@ -4973,9 +4973,9 @@
         if (($v_result = $this->privWriteCentralHeader(0, 0, 0, '')) != 1) {
           return $v_result;
         }
-
-        $this->privCloseFd();
     }
+
+    $this->privCloseFd();
 
     // ----- Return
     return $v_result;
